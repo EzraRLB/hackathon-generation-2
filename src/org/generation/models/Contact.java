@@ -1,5 +1,7 @@
 package org.generation.models;
 
+import org.generation.exceptions.InvalidDataInput;
+
 public class Contact {
     // Nombre.
     public String name;
@@ -10,7 +12,7 @@ public class Contact {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws InvalidDataInput {
         this.name = name;
     }
 
@@ -18,7 +20,7 @@ public class Contact {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(String phone) throws InvalidDataInput  {
         this.phone = phone;
     }
 
