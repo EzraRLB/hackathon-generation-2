@@ -1,4 +1,4 @@
-package org.generation.models;
+package main.java.generation.models;
 
 // Podría extender alguna estructura de datos como ArrayList, Array, etc.
 public class Agenda {

@@ -1,6 +1,6 @@
-package org.generation.models;
+package main.java.generation.models;
 
-import org.generation.exceptions.InvalidDataInput;
+import main.java.generation.exceptions.InvalidDataInput;
 
 public class Contacto {
     // Nombre.
