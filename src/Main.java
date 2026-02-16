@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Agenda agenda = new Agenda(10);/*creamos el arreglo*/
+        Agenda agenda = new Agenda();/*creamos el arreglo*/
 
         int opc = 0;
         /*hacemos el bucle para entrar al menu y seleccionar*/
@@ -45,13 +45,34 @@ public class Main {
                     break;
 
 
-                /**case 2: /**BUSCA CONTACTO
-                    System.out.println("Nombre a buscar: ");
+                case 2: /**EXISTE CONTACTO*/
+                    System.out.println("¿Qué nombre quieres saber si existe? ");
+                    name = scanner.nextLine();
+                    agenda.existeContacto(name);
+                    break;
+
+                case 3: /**BUSCA CONTACTO*/
+                    System.out.println("Introduce el nombre del contacto a buscar: ");
                     name = scanner.nextLine();
                     agenda.buscaContacto(name);
                     break;
 
-                case 3: /**EXISTE CONTACTO*/
+                    /**ELIMINA CONTACTO*/
+                case 4:
+                    System.out.println("¿Qué  quieres eliminar de la agenda? ");
+                    name = scanner.nextLine();
+                    agenda.eliminarContacto(name);
+                    break;
+
+                    /**AGENDA LLENA*/
+                case 5:
+                    agenda.agendaLlena();
+
+
+                    /**ESPACIOS LIBRES*/
+                case 6:
+                    agenda.espaciosDisponibles();
+
 
 
             }
