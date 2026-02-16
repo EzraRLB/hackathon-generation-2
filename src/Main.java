@@ -2,7 +2,6 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 import org.generation.exceptions.InvalidDataInput;
 import org.generation.models.Agenda;
-import org.generation.models.Contact;
 import java.util.Scanner;
 
 public class Main {
