@@ -29,13 +29,12 @@ public class Contacto {
         this.setPhone(phone);
     }
 
-<<<<<<< HEAD:src/org/generation/models/Contacto.java
+    @Override
     public String toString(){
         return "Contacto{" +
                 "Nombre: '" + name + '\'' +
                 ", Teléfono: '" + phone + '\'' +
                 '}';
     }
-=======
->>>>>>> 11c2d1e5fac56b92f9390484be1287005894e533:src/org/generation/models/Contact.java
+
 }

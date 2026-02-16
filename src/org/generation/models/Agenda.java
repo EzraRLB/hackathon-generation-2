@@ -15,7 +15,7 @@ public class Agenda {
 
 
     // Alexis añadirContacto: Añade un contacto a la agenda, si no se pueden
-    public void agregarContacto(Contact nuevoContacto) {
+    public void agregarContacto(Contacto nuevoContacto) {
         for(int i = 0; i < contactos.length; i++){
             if (contactos[i] == null){
                 contactos[i] =nuevoContacto;
@@ -68,35 +68,7 @@ public class Agenda {
 //            throw new invalidData("El contacto no esta registrado.");
 //
 //    }
-    public void eliminarContacto(String nombre) {
-        System.out.println("Ingresa el nombre que deseas eliminar");
-        Scanner scanner = new Scanner(System.in);
-        nombre = scanner.nextLine();
-        if (nombre == null || nombre.trim().isEmpty()) {
-            System.out.println("Nombre inválido.");
-            return;
-        }
 
-        String nombreBuscado = nombre.trim();
-
-        for (int i = 0; i < contactos.length; i++) {
-            if (contactos[i] != null &&
-                    contactos[i].getNombre() != null &&
-                    contactos[i].getNombre().equalsIgnoreCase(nombreBuscado)) {
-
-                for (int j = i; j < contactos.length - 1; j++) {
-                    contactos[j] = contactos[j + 1];
-                }
-
-                contactos[contactos.length - 1] = null;
-
-                System.out.println("Contacto eliminado correctamente.");
-                return;
-            }
-        }
-
-        System.out.println("Contacto no encontrado.");
-    }
     //Genaro de Leon
 
     public void eliminarContacto(String nombre) throws InvalidDataInput {
@@ -155,17 +127,4 @@ public class Agenda {
         return "En este directorio hay " + contactosDisponibles;
     }
 
-
-    public int espaciosDisponibles(){
-
-        int contactosDisponibles;
-        //En un array de tipo String las posiciones vacías se cuentan como "null"
-        for(int = 0; i < contactos.lenght; i++){
-            if (contactos[i] == null){
-                contactosDisponibles += i;
-            }
-
-        }
-        return "En este directorio hay " + contactosDisponibles;
-    }
 }
