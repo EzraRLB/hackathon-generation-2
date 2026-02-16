@@ -1,6 +1,7 @@
 package org.generation.models;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 // Podría extender alguna estructura de datos como ArrayList, Array, etc.
 public class Agenda {
@@ -74,18 +75,48 @@ public class Agenda {
     }
 
     // eliminarContacto: Elimina un contacto de la agenda. Indica si se ha eliminado o no por pantalla.
-    public void eliminarContacto(String nombre) throws invaidDataInput {
-
-        System.out.println("Ingresa el nombre del contacto que deseas eliminar");
-        if(nombre==null || nombre.trim().isEmpty()){throw new invaidDataInput("El nombre no debe estar en blanco");}
-        else
-        if (contactos.containsKey(nombre)){
-            contactos.remove(nombre);
-            System.out.println("El contacto "+nombre +" ha sido eliminado.");
+//    public void eliminarContacto(String nombre) throws invaidDataInput {
+//
+//        System.out.println("Ingresa el nombre del contacto que deseas eliminar");
+//
+//        if(nombre==null || nombre.trim().isEmpty()){throw new invaidDataInput("El nombre no debe estar en blanco");}
+//        else
+//        if (contactos.containsKey(nombre)){
+//            contactos.remove(nombre);
+//            System.out.println("El contacto "+nombre +" ha sido eliminado.");
+//        }
+//        else
+//            throw new invalidData("El contacto no esta registrado.");
+//
+//    }
+    public void eliminarContacto(String nombre) {
+        System.out.println("Ingresa el nombre que deseas eliminar");
+        Scanner scanner = new Scanner(System.in);
+        nombre = scanner.nextLine();
+        if (nombre == null || nombre.trim().isEmpty()) {
+            System.out.println("Nombre inválido.");
+            return;
         }
-        else
-            throw new invalidData("El contacto no esta registrado.");
 
+        String nombreBuscado = nombre.trim();
+
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] != null &&
+                    contactos[i].getNombre() != null &&
+                    contactos[i].getNombre().equalsIgnoreCase(nombreBuscado)) {
+
+                for (int j = i; j < contactos.length - 1; j++) {
+                    contactos[j] = contactos[j + 1];
+                }
+
+                contactos[contactos.length - 1] = null;
+
+                System.out.println("Contacto eliminado correctamente.");
+                return;
+            }
+        }
+
+        System.out.println("Contacto no encontrado.");
     }
     //Genaro de Leon
 
