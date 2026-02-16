@@ -1,16 +1,18 @@
 package org.generation.models;
 
+import java.util.HashMap;
+
 // Podría extender alguna estructura de datos como ArrayList, Array, etc.
 public class Agenda {
 
     // Recibe contactos como objetos.
     //private Contacto[] contactos;
-    private HashMap<String, Contacto> contactos;
+    private HashMap<String, Contact> contactos;
     // Se crea de dos formas: Indicándole nosotros el tamaño:
     //public Agenda(int tamaño) {
         //this.contactos = new Contacto[tamaño];
     //}
-    public Agenda() {
+    public Agenda(int i) {
         this.contactos = new HashMap<>();
     }
 
@@ -21,34 +23,17 @@ public class Agenda {
 
 
     // Alexis añadirContacto: Añade un contacto a la agenda, si no se pueden
-    private static void agregarContacto(Contacto nuevoContacto) {
-        System.out.println("Agregar nuevo contacto");
+    public void agregarContacto(Contact nuevoContacto) {
+        contactos.put(nuevoContacto.getName(),nuevoContacto);
+        System.out.println("Contacto añadido correctamente!");
 
-        System.out.print("Nombre: ");
-        String nombre = scanner.nextLine().trim();
-
-        if (nombre.isEmpty()) {
-            System.out.println("El nombre no puede estar vacío");
-            return;
-        }
-
-        System.out.print("Teléfono: ");
-        String telefono = scanner.nextLine().trim();
-
-        if (telefono.isEmpty()) {
-            System.out.println("El teléfono no puede estar vacío");
-            return;
-        }
-
-        Contacto nuevoContacto = new Contacto(nombre, telefono);
-        Agenda.agregarContacto(nuevoContacto);
     }
 
     // añadir más a la agenda se indicará por pantalla indicando el motivo.
 
 
     // Zorayda existeContacto: Indica si un contacto existe en la agenda.
-    public boolean existeContacto(Contacto c) {
+    public boolean existeContacto(Contact) {
         for (int i = 0; i < contactos.length; i++) {
             if (contactos[i] != null && contactos[i].equals(c)) {
                 return true;
