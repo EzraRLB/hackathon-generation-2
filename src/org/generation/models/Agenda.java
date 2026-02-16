@@ -12,7 +12,30 @@ public class Agenda {
     // O con un tamaño por defecto:
 
 
-    // añadirContacto: Añade un contacto a la agenda, si no se pueden
+    // Alexis añadirContacto: Añade un contacto a la agenda, si no se pueden
+    private static void agregarContacto(Contacto nuevoContacto) {
+        System.out.println("Agregar nuevo contacto");
+
+        System.out.print("Nombre: ");
+        String nombre = scanner.nextLine().trim();
+
+        if (nombre.isEmpty()) {
+            System.out.println("El nombre no puede estar vacío");
+            return;
+        }
+
+        System.out.print("Teléfono: ");
+        String telefono = scanner.nextLine().trim();
+
+        if (telefono.isEmpty()) {
+            System.out.println("El teléfono no puede estar vacío");
+            return;
+        }
+
+        Contacto nuevoContacto = new Contacto(nombre, telefono);
+        Agenda.agregarContacto(nuevoContacto);
+    }
+
     // añadir más a la agenda se indicará por pantalla indicando el motivo.
 
 
