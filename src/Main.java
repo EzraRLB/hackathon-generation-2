@@ -2,6 +2,8 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 import org.generation.exceptions.InvalidDataInput;
 import org.generation.models.Agenda;
+import org.generation.models.Contacto;
+
 import java.util.Scanner;
 
 public class Main {
@@ -37,7 +39,7 @@ public class Main {
                     /**se crea el contacto nuevo manejando las exepciones, si hay datos invalidos*/
 
                     try{
-                        Contact nuevo = new Contact(name,phone);
+                        Contacto nuevo = new Contacto(name,phone);
                         agenda.agregarContacto(nuevo);
                     }catch (InvalidDataInput e){
                         System.out.println("Error: " + e.getMessage());
