@@ -28,4 +28,5 @@ public class Contact {
         this.setName(name);
         this.setPhone(phone);
     }
+
 }
