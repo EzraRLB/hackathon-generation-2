@@ -1,25 +1,25 @@
 package org.generation.models;
-
+import org.generation.models.Contacto;
 import java.util.HashMap;
 
 // Podría extender alguna estructura de datos como ArrayList, Array, etc.
 public class Agenda {
 
     // Recibe contactos como objetos.
-    //private Contacto[] contactos;
-    private HashMap<String, Contacto> contactos;
+    private Contacto[] contactos;
+    //private HashMap<String, Contacto> contactos;
     // Se crea de dos formas: Indicándole nosotros el tamaño:
-    //public Agenda(int tamaño) {
-        //this.contactos = new Contacto[tamaño];
-    //}
-    public Agenda() {
-        this.contactos = new HashMap<>();
+    public Agenda(int tamaño) {
+        this.contactos = new Contacto[tamaño];
     }
+    //public Agenda() {
+        //this.contactos = new HashMap<>();
+    //}
 
     // O con un tamaño por defecto:
-    //public Agenda() {
-        //this.contactos = new Contacto[10];
-    //}
+    public Agenda() {
+        this.contactos = new Contacto[10];
+    }
 
 
     // Alexis añadirContacto: Añade un contacto a la agenda, si no se pueden
