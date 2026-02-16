@@ -28,4 +28,11 @@ public class Contacto {
         this.setName(name);
         this.setPhone(phone);
     }
+
+    public String toString(){
+        return "Contacto{" +
+                "Nombre: '" + name + '\'' +
+                ", Teléfono: '" + phone + '\'' +
+                '}';
+    }
 }
