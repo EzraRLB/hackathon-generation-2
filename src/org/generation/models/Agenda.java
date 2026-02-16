@@ -57,14 +57,55 @@ public class Agenda {
     }
 
     // eliminarContacto: Elimina un contacto de la agenda. Indica si se ha eliminado o no por pantalla.
+    public void eliminarContacto(String nombre) throws invaidDataInput {
+
+        System.out.println("Ingresa el nombre del contacto que deseas eliminar");
+        if(nombre==null || nombre.trim().isEmpty()){throw new invaidDataInput("El nombre no debe estar en blanco");}
+        else
+        if (contactos.containsKey(nombre)){
+            contactos.remove(nombre);
+            System.out.println("El contacto "+nombre +" ha sido eliminado.");
+        }
+        else
+            throw new invalidData("El contacto no esta registrado.");
+
+    }
+    //Genaro de Leon
 
     // agendaLlena: Indica si la agenda está llena. Debería mandarse a llamar cuando
     // se quiera añadir un contacto y
     // no haya espacio disponible.
 
+    public void agendaLlena(){
+
+        for(int = 0; i < contactos.lengh; i++){
+
+            if( contactos[i] != null ){
+
+                System.out.println("No hay más espacio disponible");
+            }
+        }
+    }
+
 
     // espacioDisponible: Indica el espacio disponible en la agenda. Cuenta los contactos
     // que conforman la agenda y lo resta al tamaño total de la agenda.
+
+    public int espaciosDisponibles(){
+
+        int contactosDisponibles;
+        //En un array de tipo String las posiciones vacías se cuentan como "null"
+        for(int = 0; i < contactos.lenght; i++){
+            if (contactos[i] == null){
+                contactosDisponibles += i;
+            }
+
+        }
+        return "En este directorio hay " + contactosDisponibles;
+    }
+
+
+
 
 
 }

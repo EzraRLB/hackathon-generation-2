@@ -2,7 +2,7 @@ package org.generation.models;
 
 import org.generation.exceptions.InvalidDataInput;
 
-public class Contact {
+public class Contacto {
     // Nombre.
     public String name;
     // Teléfono.
@@ -24,8 +24,15 @@ public class Contact {
         this.phone = phone;
     }
 
-    public Contact(String name, String phone) {
+    public Contacto(String name, String phone) {
         this.setName(name);
         this.setPhone(phone);
+    }
+
+    public String toString(){
+        return "Contacto{" +
+                "Nombre: '" + name + '\'' +
+                ", Teléfono: '" + phone + '\'' +
+                '}';
     }
 }
