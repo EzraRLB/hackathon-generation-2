@@ -4,15 +4,46 @@ package org.generation.models;
 public class Agenda {
 
     // Recibe contactos como objetos.
-
-
+    //private Contacto[] contactos;
+    private HashMap<String, Contacto> contactos;
     // Se crea de dos formas: Indicándole nosotros el tamaño:
-
+    //public Agenda(int tamaño) {
+        //this.contactos = new Contacto[tamaño];
+    //}
+    public Agenda() {
+        this.contactos = new HashMap<>();
+    }
 
     // O con un tamaño por defecto:
+    //public Agenda() {
+        //this.contactos = new Contacto[10];
+    //}
 
 
-    // añadirContacto: Añade un contacto a la agenda, si no se pueden
+    // Alexis añadirContacto: Añade un contacto a la agenda, si no se pueden
+    private static void agregarContacto(Contacto nuevoContacto) {
+        System.out.println("Agregar nuevo contacto");
+
+        System.out.print("Nombre: ");
+        String nombre = scanner.nextLine().trim();
+
+        if (nombre.isEmpty()) {
+            System.out.println("El nombre no puede estar vacío");
+            return;
+        }
+
+        System.out.print("Teléfono: ");
+        String telefono = scanner.nextLine().trim();
+
+        if (telefono.isEmpty()) {
+            System.out.println("El teléfono no puede estar vacío");
+            return;
+        }
+
+        Contacto nuevoContacto = new Contacto(nombre, telefono);
+        Agenda.agregarContacto(nuevoContacto);
+    }
+
     // añadir más a la agenda se indicará por pantalla indicando el motivo.
 
 
