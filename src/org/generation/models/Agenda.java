@@ -16,14 +16,29 @@ public class Agenda {
     // añadir más a la agenda se indicará por pantalla indicando el motivo.
 
 
-    // existeContacto: Indica si un contacto existe en la agenda.
-
+    // Zorayda existeContacto: Indica si un contacto existe en la agenda.
+    public boolean existeContacto(Contacto c) {
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] != null && contactos[i].equals(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // listaContactos: Muestra los contactos de la agenda.
 
 
-    // buscarContacto: Busca un contacto por su nombre y muestra su teléfono.
-
+    // Zorayda buscarContacto: Busca un contacto por su nombre y muestra su teléfono.
+    public void buscaContacto(String nombre) {
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] != null && contactos[i].getNombre().equals(nombre)) {
+                System.out.println("Teléfono de " + nombre + ": " + contactos[i].getTelefono());
+                return;
+            }
+        }
+        System.out.println("Contacto no encontrado.");
+    }
 
     // eliminarContacto: Elimina un contacto de la agenda. Indica si se ha eliminado o no por pantalla.
 
