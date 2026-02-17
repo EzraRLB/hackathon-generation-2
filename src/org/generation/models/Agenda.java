@@ -1,8 +1,7 @@
 package org.generation.models;
 
 public class Agenda {
-    
-    // Array de contactos
+
     private Contacto[] contactos;
 
     // Constructor con tamaño personalizado
@@ -15,9 +14,8 @@ public class Agenda {
         this.contactos = new Contacto[10];
     }
 
-    // ========== MÉTODOS REQUERIDOS POR LA RÚBRICA ==========
-
-    // añadirContacto: Añade un contacto a la agenda
+    // MÉTODOS
+    //agregar contacto
     public void agregarContacto(Contacto nuevoContacto) {
         if (agendaLlena()) {
             System.out.println("No se puede agregar: la agenda esta llena.");
@@ -38,7 +36,7 @@ public class Agenda {
         }
     }
 
-    // existeContacto(Contacto c): Indica si el contacto existe o no
+    // existeContacto
     public boolean existeContacto(Contacto c) {
         for (int i = 0; i < contactos.length; i++) {
             if (contactos[i] != null && contactos[i].equals(c)) {
@@ -58,7 +56,7 @@ public class Agenda {
         return false;
     }
 
-    // listarContactos(): Lista toda la agenda
+    // listarContactos
     public void listarContactos() {
         System.out.println("=== LISTA DE CONTACTOS ===");
         boolean hayContactos = false;
@@ -75,7 +73,7 @@ public class Agenda {
         }
     }
 
-    // buscaContacto(String nombre): Busca por nombre y muestra su teléfono
+    // buscaContacto
     public void buscaContacto(String nombre) {
         for (int i = 0; i < contactos.length; i++) {
             if (contactos[i] != null && contactos[i].getName().equalsIgnoreCase(nombre)) {
@@ -86,7 +84,7 @@ public class Agenda {
         System.out.println("Contacto no encontrado.");
     }
 
-    // eliminarContacto(Contacto c): Elimina el contacto de la agenda
+    // eliminarContacto
     public boolean eliminarContacto(Contacto c) {
         for (int i = 0; i < contactos.length; i++) {
             if (contactos[i] != null && contactos[i].equals(c)) {
@@ -112,7 +110,7 @@ public class Agenda {
         return false;
     }
 
-    // agendaLlena(): Indica si la agenda está llena
+    // agendaLlena
     public boolean agendaLlena() {
         for (int i = 0; i < contactos.length; i++) {
             if (contactos[i] == null) {
@@ -122,7 +120,7 @@ public class Agenda {
         return true;
     }
 
-    // espacioLibres(): Indica cuántos contactos más podemos tener
+    // espacioLibres
     public int espacioLibres() {
         int espacios = 0;
         for (int i = 0; i < contactos.length; i++) {
@@ -133,9 +131,9 @@ public class Agenda {
         return espacios;
     }
 
-    // ========== MÉTODOS PARA LA GUI ==========
+    // MÉTODOS PARA LA INTERFAZ
 
-    // Retorna el teléfono de un contacto (para GUI)
+    // Retorna el teléfono de un contacto 
     public String obtenerTelefono(String nombre) {
         for (int i = 0; i < contactos.length; i++) {
             if (contactos[i] != null && contactos[i].getName().equalsIgnoreCase(nombre)) {
@@ -145,7 +143,7 @@ public class Agenda {
         return null;
     }
 
-    // Retorna la lista completa como String (para GUI)
+    // Retorna la lista completa como String
     public String obtenerListaContactos() {
         StringBuilder lista = new StringBuilder();
         for (int i = 0; i < contactos.length; i++) {

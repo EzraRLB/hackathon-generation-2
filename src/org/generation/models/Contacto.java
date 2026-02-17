@@ -1,17 +1,14 @@
 package org.generation.models;
 
 public class Contacto {
-    // Atributos privados
     private String name;
     private String phone;
 
-    // Constructor
     public Contacto(String name, String phone) {
         this.name = name;
         this.phone = phone;
     }
 
-    // Getters
     public String getName() {
         return name;
     }
@@ -20,7 +17,6 @@ public class Contacto {
         return phone;
     }
 
-    // Setters
     public void setName(String name) {
         this.name = name;
     }

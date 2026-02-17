@@ -16,10 +16,9 @@ public class AgendaGUI extends JFrame {
     private Agenda agenda;
     
     public AgendaGUI() {
-        // Crear la agenda con tamaño por defecto (10)
         agenda = new Agenda();
         
-        // Configurar la ventana principal
+        // Ventana principal
         setTitle("Agenda de Contactos");
         setSize(500, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,12 +31,12 @@ public class AgendaGUI extends JFrame {
         panelPrincipal.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         panelPrincipal.setBackground(new Color(240, 240, 245));
         
-        // ========== PANEL SUPERIOR: Titulo ==========
+        // Titulo
         JLabel titulo = new JLabel("AGENDA DE CONTACTOS", SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 20));
         titulo.setForeground(new Color(50, 50, 100));
         
-        // ========== PANEL DE INPUTS ==========
+        // INPUTS
         JPanel panelInputs = new JPanel(new GridBagLayout());
         panelInputs.setBackground(new Color(240, 240, 245));
         GridBagConstraints gbc = new GridBagConstraints();
@@ -75,7 +74,7 @@ public class AgendaGUI extends JFrame {
         txtTelefono.setFont(new Font("Arial", Font.PLAIN, 14));
         panelInputs.add(txtTelefono, gbc);
         
-        // ========== PANEL DE BOTONES ==========
+        // BOTONES
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         panelBotones.setBackground(new Color(240, 240, 245));
         
@@ -89,7 +88,7 @@ public class AgendaGUI extends JFrame {
         panelBotones.add(btnEliminar);
         panelBotones.add(btnListar);
         
-        // ========== AREA DE RESULTADOS ==========
+        // AREA DE RESULTADOS 
         areaContactos = new JTextArea(10, 40);
         areaContactos.setEditable(false);
         areaContactos.setFont(new Font("Monospaced", Font.PLAIN, 13));
