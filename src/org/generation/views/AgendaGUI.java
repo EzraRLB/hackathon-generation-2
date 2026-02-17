@@ -150,16 +150,22 @@ public class AgendaGUI extends JFrame {
     }
     
     // Metodo auxiliar para crear botones con estilo
-    private JButton crearBoton(String texto, Color color) {
-        JButton boton = new JButton(texto);
-        boton.setBackground(color);
-        boton.setForeground(Color.WHITE);
-        boton.setFont(new Font("Arial", Font.BOLD, 12));
-        boton.setFocusPainted(false);
-        boton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
-        boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        return boton;
-    }
+  // Metodo auxiliar para crear botones con estilo
+private JButton crearBoton(String texto, Color color) {
+    JButton boton = new JButton(texto);
+    boton.setBackground(color);
+    boton.setForeground(Color.WHITE);
+    boton.setFont(new Font("Arial", Font.BOLD, 12));
+    boton.setFocusPainted(false);
+    boton.setBorder(BorderFactory.createEmptyBorder(8, 15, 8, 15));
+    boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    
+    // === AGREGAR ESTAS 2 LÍNEAS PARA macOS ===
+    boton.setOpaque(true);
+    boton.setBorderPainted(false);
+    
+    return boton;
+}
     
     // ========== METODOS QUE CONECTAN CON LA AGENDA ==========
     
