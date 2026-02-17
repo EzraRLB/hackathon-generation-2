@@ -1,114 +1,128 @@
-package main.java.generation.models;
+package generation.models;
+
+import java.util.HashMap;
+import java.util.Scanner;
 
 // Podría extender alguna estructura de datos como ArrayList, Array, etc.
 public class Agenda {
 
+    private HashMap<String, Contact> contactos = new HashMap<String, Contact>();
+    private int agendaMaxSize = 10;
+
     // Recibe contactos como objetos.
-    //private Contacto[] contactos;
-    private HashMap<String, Contacto> contactos;
+
     // Se crea de dos formas: Indicándole nosotros el tamaño:
-    //public Agenda(int tamaño) {
-        //this.contactos = new Contacto[tamaño];
-    //}
-    public Agenda() {
-        this.contactos = new HashMap<>();
-    }
-
     // O con un tamaño por defecto:
-    //public Agenda() {
-        //this.contactos = new Contacto[10];
-    //}
+    public HashMap<String, Contact> getContactos() { return contactos; }
+    public void setContactos(HashMap<String, Contact> contactos) { this.contactos = contactos; }
+
+    public int getAgendaMaxSize() { return agendaMaxSize; }
+    public void setAgendaMaxSize(int agendaSize) { this.agendaMaxSize = agendaSize; }
+
+    public Agenda(HashMap<String, Contact> contactos, Scanner sc) {
+        System.out.println("Se creará una nueva agenda con [tamaño por defecto = 10] contactos disponibles.");
+        System.out.println("Si desea un número específico, ingrese un número a continuación.");
+        System.out.println("De ser cero, un número menor a cero, o letra, se usará tamaño por defecto.");
 
 
-    // Alexis añadirContacto: Añade un contacto a la agenda, si no se pueden
-    private static void agregarContacto(Contacto nuevoContacto) {
-        System.out.println("Agregar nuevo contacto");
-
-        System.out.print("Nombre: ");
-        String nombre = scanner.nextLine().trim();
-
-        if (nombre.isEmpty()) {
-            System.out.println("El nombre no puede estar vacío");
-            return;
+        if (sc.hasNextInt()) {
+            int input = sc.nextInt();
+            if (input > 0) this.agendaMaxSize = input;
+            sc.nextLine();
+        } else {
+            System.out.println("Usando tamaño por defecto.");
         }
 
-        System.out.print("Teléfono: ");
-        String telefono = scanner.nextLine().trim();
+        System.out.println("La agenda tiene un total de " + agendaMaxSize + " contactos disponibles.");
 
-        if (telefono.isEmpty()) {
-            System.out.println("El teléfono no puede estar vacío");
-            return;
-        }
-
-        Contacto nuevoContacto = new Contacto(nombre, telefono);
-        Agenda.agregarContacto(nuevoContacto);
+        this.contactos = contactos;
     }
 
-    // añadir más a la agenda se indicará por pantalla indicando el motivo.
+    // añadirContacto: Añade un contacto a la agenda, si no se pueden
+    // añadir más a la agenda se indicará por pantalla mencionando el motivo.
+    public void agregarContacto() throws main.java.generation.exceptions.InvalidDataInput {
+        if (agendaLlena()) {
+            return;
+        } else {
+            System.out.println("Usando un espacio de contacto...");
+            Scanner sc = new Scanner(System.in);
 
+            System.out.println("Introducir datos del nuevo contacto.");
+            try {
+                System.out.print("Nombre: ");
+                String nombreContacto = sc.nextLine().trim();
+                System.out.print("Teléfono: ");
+                String telefonoContacto = sc.nextLine().trim().replaceAll("\\s+", "");
 
-    // Zorayda existeContacto: Indica si un contacto existe en la agenda.
-    public boolean existeContacto(Contacto c) {
-        for (int i = 0; i < contactos.length; i++) {
-            if (contactos[i] != null && contactos[i].equals(c)) {
-                return true;
+                Contact nuevoContacto = new Contact(nombreContacto, telefonoContacto);
+
+                if (existeContacto(nuevoContacto)) {
+                    System.out.println("El contacto " + nuevoContacto.getName() + " ya existe.");
+                    return;
+                } else {
+                    contactos.put(nuevoContacto.getName(), nuevoContacto);
+                    System.out.println("Contacto agregado correctamente.");
+                }
+
+            } catch (main.java.generation.exceptions.InvalidDataInput e) {
+                System.out.println(e.getMessage());
             }
+            espaciosDisponibles();
         }
-        return false;
     }
 
-    // listaContactos: Muestra los contactos de la agenda.
-
-
-    // Zorayda buscarContacto: Busca un contacto por su nombre y muestra su teléfono.
-    public void buscaContacto(String nombre) {
-        for (int i = 0; i < contactos.length; i++) {
-            if (contactos[i] != null && contactos[i].getNombre().equals(nombre)) {
-                System.out.println("Teléfono de " + nombre + ": " + contactos[i].getTelefono());
-                return;
-            }
+    // existeContacto: Indica si un contacto existe en la agenda.
+    public boolean existeContacto(Contact c) {
+        if (contactos.containsKey(c.getName())) {
+            System.out.println("El contacto " + c.getName() + " ya existe.");
+            return true;
+        } else {
+            return false;
         }
-        System.out.println("Contacto no encontrado.");
     }
 
     // eliminarContacto: Elimina un contacto de la agenda. Indica si se ha eliminado o no por pantalla.
-
-    //Genaro de Leon
-
-    // agendaLlena: Indica si la agenda está llena. Debería mandarse a llamar cuando
-    // se quiera añadir un contacto y
-    // no haya espacio disponible.
-
-    public void agendaLlena(){
-
-        for(int = 0; i < contactos.lengh; i++){
-
-            if( contactos[i] != null ){
-
-                System.out.println("No hay más espacio disponible");
-            }
+    public void eliminaContacto(String nombre) {
+        if (contactos.containsKey(nombre)) {
+            contactos.remove(nombre);
+            System.out.println("El contacto '" + nombre + "' ha sido eliminado.");
+        } else {
+            System.out.println("No se pudo eliminar: El nombre '" + nombre + "' no existe.");
         }
     }
 
+    // listaContactos: Muestra los contactos de la agenda.
+    public void listaContactos() {
+        for (Contact c : contactos.values()) {
+            System.out.println(c);
+        }
+    }
+
+    // buscarContacto: Busca un contacto por su nombre y muestra su teléfono.
+    public void buscaContacto(String nombre) {
+        if (contactos.containsKey(nombre)) {
+            Contact c = contactos.get(nombre);
+            System.out.println("Datos de " + nombre + ": " + c.getPhone());
+        } else {
+            System.out.println("Contacto no encontrado.");
+        }
+    }
+
+    // agendaLlena: Indica si la agenda está llena. Debería mandarse a llamar cuando
+    // se quiera añadir un contacto y no haya espacio disponible.
+    public boolean agendaLlena() {
+        if (contactos.size() == getAgendaMaxSize()) {
+            System.out.println("La agenda está llena. No es posible agregar más contactos.");
+            return true;
+        } else {
+            espaciosDisponibles();
+            return false;
+        }
+    }
 
     // espacioDisponible: Indica el espacio disponible en la agenda. Cuenta los contactos
     // que conforman la agenda y lo resta al tamaño total de la agenda.
-
-    public int espaciosDisponibles(){
-
-        int contactosDisponibles;
-        //En un array de tipo String las posiciones vacías se cuentan como "null"
-        for(int = 0; i < contactos.lenght; i++){
-            if (contactos[i] == null){
-                contactosDisponibles += i;
-            }
-
-        }
-        return "En este directorio hay " + contactosDisponibles;
+    public void espaciosDisponibles() {
+        System.out.println("Quedan " + (getAgendaMaxSize() - contactos.size()) + " espacios disponibles.");
     }
-
-
-
-
-
 }
