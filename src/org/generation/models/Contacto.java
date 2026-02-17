@@ -1,41 +1,47 @@
 package org.generation.models;
 
-import org.generation.exceptions.InvalidDataInput;
-
 public class Contacto {
-    // Nombre.
-    public String name;
-    // Teléfono.
-    public String phone;
+    // Atributos privados
+    private String name;
+    private String phone;
 
-    public String getName() {
-        return name;
+    // Constructor
+    public Contacto(String name, String phone) {
+        this.name = name;
+        this.phone = phone;
     }
 
-    public void setName(String name) throws InvalidDataInput {
-        this.name = name;
+    // Getters
+    public String getName() {
+        return name;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) throws InvalidDataInput  {
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public Contacto(String name, String phone) {
-        this.setName(name);
-        this.setPhone(phone);
+    // equals(): Dos contactos son iguales si tienen el mismo nombre
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Contacto) {
+            Contacto otro = (Contacto) obj;
+            return this.name.equalsIgnoreCase(otro.name);
+        }
+        return false;
     }
 
-<<<<<<< HEAD:src/org/generation/models/Contacto.java
-    public String toString(){
-        return "Contacto{" +
-                "Nombre: '" + name + '\'' +
-                ", Teléfono: '" + phone + '\'' +
-                '}';
+    // toString(): Para mostrar el contacto
+    @Override
+    public String toString() {
+        return "Nombre: " + name + ", Telefono: " + phone;
     }
-=======
->>>>>>> 11c2d1e5fac56b92f9390484be1287005894e533:src/org/generation/models/Contact.java
 }

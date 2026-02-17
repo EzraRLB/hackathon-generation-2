@@ -1,171 +1,158 @@
 package org.generation.models;
-import org.generation.models.Contacto;
-import java.util.Scanner;
-import org.generation.exceptions.InvalidDataInput;
-
-
 
 public class Agenda {
-    // Recibe contactos como objetos.
-    private Contacto[] contactos;
     
+    // Array de contactos
+    private Contacto[] contactos;
+
+    // Constructor con tamaño personalizado
+    public Agenda(int tamanio) {
+        this.contactos = new Contacto[tamanio];
+    }
+
+    // Constructor con tamaño por defecto (10)
     public Agenda() {
         this.contactos = new Contacto[10];
     }
 
+    // ========== MÉTODOS REQUERIDOS POR LA RÚBRICA ==========
 
-    // Alexis añadirContacto: Añade un contacto a la agenda, si no se pueden
-    public void agregarContacto(Contact nuevoContacto) {
-        for(int i = 0; i < contactos.length; i++){
-            if (contactos[i] == null){
-                contactos[i] =nuevoContacto;
-                System.out.println("Se añadió correctamente el contacto.");
+    // añadirContacto: Añade un contacto a la agenda
+    public void agregarContacto(Contacto nuevoContacto) {
+        if (agendaLlena()) {
+            System.out.println("No se puede agregar: la agenda esta llena.");
+            return;
+        }
+        
+        if (existeContacto(nuevoContacto)) {
+            System.out.println("No se puede agregar: el contacto ya existe.");
+            return;
+        }
+        
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] == null) {
+                contactos[i] = nuevoContacto;
+                System.out.println("Contacto agregado exitosamente.");
                 return;
             }
         }
-        System.out.println("Agenda llena, no se puede añadir.");
     }
 
-    // añadir más a la agenda se indicará por pantalla indicando el motivo.
-
-
-    // Zorayda existeContacto: Indica si un contacto existe en la agenda.
-    public boolean existeContacto(String nombre) {
+    // existeContacto(Contacto c): Indica si el contacto existe o no
+    public boolean existeContacto(Contacto c) {
         for (int i = 0; i < contactos.length; i++) {
-            if (contactos[i] != null && contactos[i].getName().equals(nombre)) {/**contactos esta en la posicion i, get name obitne el nombre, equals compara lo que se busca*/
+            if (contactos[i] != null && contactos[i].equals(c)) {
                 return true;
             }
         }
         return false;
     }
 
-    // listaContactos: Muestra los contactos de la agenda.
+    // existeContacto por nombre (para consola)
+    public boolean existeContacto(String nombre) {
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] != null && contactos[i].getName().equalsIgnoreCase(nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    // listarContactos(): Lista toda la agenda
+    public void listarContactos() {
+        System.out.println("=== LISTA DE CONTACTOS ===");
+        boolean hayContactos = false;
+        
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] != null) {
+                System.out.println(contactos[i].toString());
+                hayContactos = true;
+            }
+        }
+        
+        if (!hayContactos) {
+            System.out.println("La agenda esta vacia.");
+        }
+    }
 
-    // Zorayda buscarContacto: Busca un contacto por su nombre y muestra su teléfono.
+    // buscaContacto(String nombre): Busca por nombre y muestra su teléfono
     public void buscaContacto(String nombre) {
         for (int i = 0; i < contactos.length; i++) {
-            if (contactos[i] != null && contactos[i].getName().equals(nombre)) {
-                System.out.println("Teléfono de " + nombre + ": " + contactos[i].getPhone());
+            if (contactos[i] != null && contactos[i].getName().equalsIgnoreCase(nombre)) {
+                System.out.println("Telefono de " + nombre + ": " + contactos[i].getPhone());
                 return;
             }
         }
         System.out.println("Contacto no encontrado.");
     }
 
-    // eliminarContacto: Elimina un contacto de la agenda. Indica si se ha eliminado o no por pantalla.
-//    public void eliminarContacto(String nombre) throws invaidDataInput {
-//
-//        System.out.println("Ingresa el nombre del contacto que deseas eliminar");
-//
-//        if(nombre==null || nombre.trim().isEmpty()){throw new invaidDataInput("El nombre no debe estar en blanco");}
-//        else
-//        if (contactos.containsKey(nombre)){
-//            contactos.remove(nombre);
-//            System.out.println("El contacto "+nombre +" ha sido eliminado.");
-//        }
-//        else
-//            throw new invalidData("El contacto no esta registrado.");
-//
-//    }
-    public void eliminarContacto(String nombre) {
-        System.out.println("Ingresa el nombre que deseas eliminar");
-        Scanner scanner = new Scanner(System.in);
-        nombre = scanner.nextLine();
-        if (nombre == null || nombre.trim().isEmpty()) {
-            System.out.println("Nombre inválido.");
-            return;
-        }
-
-        String nombreBuscado = nombre.trim();
-
+    // eliminarContacto(Contacto c): Elimina el contacto de la agenda
+    public boolean eliminarContacto(Contacto c) {
         for (int i = 0; i < contactos.length; i++) {
-            if (contactos[i] != null &&
-                    contactos[i].getNombre() != null &&
-                    contactos[i].getNombre().equalsIgnoreCase(nombreBuscado)) {
-
-                for (int j = i; j < contactos.length - 1; j++) {
-                    contactos[j] = contactos[j + 1];
-                }
-
-                contactos[contactos.length - 1] = null;
-
-                System.out.println("Contacto eliminado correctamente.");
-                return;
+            if (contactos[i] != null && contactos[i].equals(c)) {
+                contactos[i] = null;
+                System.out.println("Contacto eliminado exitosamente.");
+                return true;
             }
         }
-
-        System.out.println("Contacto no encontrado.");
-    }
-    //Genaro de Leon
-
-    public void eliminarContacto(String nombre) throws InvalidDataInput {
-
-        System.out.println("Ingresa el nombre del contacto que deseas eliminar");
-        if(nombre==null || nombre.trim().isEmpty()){
-            throw new InvalidDataInput("El nombre no debe estar en blanco");
-        }
-        boolean find = false;
-
-        for (int i = 0; i < contactos.length; i++){
-            if(contactos[i] != null && contactos[i].getName().equals(nombre)){
-                for(int j = i; j < contactos.length -1; j++){
-                    contactos[j] = contactos[j+1];
-                }
-                contactos[contactos.length -1] = null;
-                System.out.println("El contacto " + nombre + "ha sido eliminado.");
-                find = true;
-                break;
-            }
-        }
-        if(!find){
-            throw new InvalidDataInput("El contacto no está registrado");
-        }
-
+        System.out.println("No se encontro el contacto para eliminar.");
+        return false;
     }
 
-    // agendaLlena: Indica si la agenda está llena. Debería mandarse a llamar cuando
-    // se quiera añadir un contacto y
-    // no haya espacio disponible.
-
-    public void agendaLlena(){
-
-        for (int i= 0; i < contactos.length; i++){
-
-            if(contactos[i] != null ){
-
-                System.out.println("No hay más espacio disponible");
+    // eliminarContacto por nombre (para consola)
+    public boolean eliminarContacto(String nombre) {
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] != null && contactos[i].getName().equalsIgnoreCase(nombre)) {
+                contactos[i] = null;
+                System.out.println("Contacto " + nombre + " eliminado exitosamente.");
+                return true;
             }
         }
+        System.out.println("No se encontro el contacto para eliminar.");
+        return false;
     }
 
-
-    // espacioDisponible: Indica el espacio disponible en la agenda. Cuenta los contactos
-    // que conforman la agenda y lo resta al tamaño total de la agenda.
-    public String espaciosDisponibles(){
-
-        int contactosDisponibles = 0;
-        //En un array de tipo String las posiciones vacías se cuentan como "null"
-        for(int i= 0; i < contactos.length; i++){
-            if (contactos[i] == null){
-                contactosDisponibles++;
+    // agendaLlena(): Indica si la agenda está llena
+    public boolean agendaLlena() {
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] == null) {
+                return false;
             }
-
         }
-        return "En este directorio hay " + contactosDisponibles;
+        return true;
     }
 
-
-    public int espaciosDisponibles(){
-
-        int contactosDisponibles;
-        //En un array de tipo String las posiciones vacías se cuentan como "null"
-        for(int = 0; i < contactos.lenght; i++){
-            if (contactos[i] == null){
-                contactosDisponibles += i;
+    // espacioLibres(): Indica cuántos contactos más podemos tener
+    public int espacioLibres() {
+        int espacios = 0;
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] == null) {
+                espacios++;
             }
-
         }
-        return "En este directorio hay " + contactosDisponibles;
+        return espacios;
+    }
+
+    // ========== MÉTODOS PARA LA GUI ==========
+
+    // Retorna el teléfono de un contacto (para GUI)
+    public String obtenerTelefono(String nombre) {
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] != null && contactos[i].getName().equalsIgnoreCase(nombre)) {
+                return contactos[i].getPhone();
+            }
+        }
+        return null;
+    }
+
+    // Retorna la lista completa como String (para GUI)
+    public String obtenerListaContactos() {
+        StringBuilder lista = new StringBuilder();
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] != null) {
+                lista.append(contactos[i].toString()).append("\n");
+            }
+        }
+        return lista.toString();
     }
 }
